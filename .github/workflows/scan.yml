@@ -8,7 +8,7 @@ on:
         docker_image:
           description: 'The Docker image to scan'
           required: true
-          default: 'docker model pull ai/glm-5-safetensors:latest'
+          default: 'docker model pull ai/all-minilm-l6-v2-vllm:latest'
 
 # env:
 #   REGISTRY: ghcr.io
