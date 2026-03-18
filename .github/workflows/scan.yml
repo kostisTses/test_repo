@@ -10,10 +10,10 @@ on:
           required: true
           default: 'docker model pull ai/all-minilm-l6-v2-vllm:latest'
 
-# env:
-#   REGISTRY: ghcr.io
-#   IMAGE_NAME: ${{ github.repository }}
-#   SHA: ${{ github.event.pull_request.head.sha || github.event.after }}
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+  SHA: ${{ github.event.pull_request.head.sha || github.event.after }}
 
 jobs:
   scout:
@@ -26,6 +26,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Set lowercase image name
+        run: echo "IMAGE_NAME=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
       - name: Login to Dockerhub
         uses: docker/login-action@v3
